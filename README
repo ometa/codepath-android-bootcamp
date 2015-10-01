@@ -1,0 +1,29 @@
+# Todo List
+
+This is an Android demo application for a todo list.
+
+### Time
+
+5 hours spent in total:
+
+- 2.5 downloading and configuring dev environment
+- 1.5 working through initial tutorial and todo app
+- 1.0 adding edit capabilities, building animated gif, submission
+
+### Completed user stories
+
+- [x] Required: Adding and Removing todo items
+- [x] Required: Editing todo items w/ cursor focus
+- [x] Required: Persisting todo items to file and retrieval upon app restart
+
+### Notes
+
+Everything was pretty straightforward. The most time consuming part was getting
+the IDE and build envionment downloaded and configured correctly. Instructions were
+good, thanks!
+
+### GIF Walkthrough
+
+![Video Walkthrough](demo/project_0.gif)
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).

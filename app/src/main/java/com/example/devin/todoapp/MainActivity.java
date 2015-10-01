@@ -1,5 +1,6 @@
 package com.example.devin.todoapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.commons.io.FileUtils;
 
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> aTodoAdaptor;
     ListView lvItems;
     EditText etEditText;
+
+    private final int EDIT_ACTIVITY = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +46,21 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(MainActivity.this, EditItemActivity.class);
+                i.putExtra("text", (String) todoItems.toArray()[position]);
+                i.putExtra("position", position);
+                startActivityForResult(i, EDIT_ACTIVITY);
+            }
+        });
     }
 
     public void populateArrayItems() {
-//        todoItems = new ArrayList<String>();
-//        todoItems.add("Item 1");
-//        todoItems.add("Item 2");
-//        todoItems.add("Item 3");
         readItems();
         aTodoAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, todoItems);
-
     }
 
     private void readItems() {
@@ -101,5 +110,19 @@ public class MainActivity extends AppCompatActivity {
         aTodoAdaptor.add(etEditText.getText().toString());
         etEditText.setText("");
         writeItems();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == EDIT_ACTIVITY) {
+            String newItemText = data.getExtras().getString("text");
+            int position = data.getExtras().getInt("position", -1);
+
+            todoItems.set(position, newItemText);
+            aTodoAdaptor.notifyDataSetChanged();
+            writeItems();
+
+            Toast.makeText(this, "Updated to " + newItemText, Toast.LENGTH_SHORT).show();
+        }
     }
 }
