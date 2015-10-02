@@ -1,15 +1,6 @@
-# Todo List
+# Todoodle!
 
-This is an Android demo application for a todo list.
-
-### Time
-
-5 hours spent in total:
-
-- 2.5 downloading and configuring dev environment
-- 1.5 working through initial tutorial and todo app
-- 1.0 adding edit capabilities, building animated gif, submission
-- 4.0 conversion to sqlite using ActiveAndroid
+This is a super-sweet Android app for a todo list. It's my first Android app ever!
 
 ### Completed user stories
 
@@ -17,13 +8,27 @@ This is an Android demo application for a todo list.
 - [x] Required: Editing todo items w/ cursor focus
 - [x] Required: Persisting todo items to file and retrieval upon app restart
 - [x] Recommended: Persistence to Sqlite using ActiveAndroid ORM
-- [x] Bonus: Added priority field
+- [x] Bonus: Priority field that gets a default when a task is added and updates via Spinner widget
+- [x] Bonus: Color-coded entries based on priority
+- [x] Misc: Don't add a blank item
+
+### Time
+
+12 hours spent in total:
+
+- 2.5 downloading and configuring dev environment
+- 1.5 working through initial tutorial and todo app
+- 1.0 adding edit capabilities, building animated gif, submission
+- 4.0 conversion to sqlite using ActiveAndroid (on spotty internet connection)
+- 2.0 spinner widget for priority
+- 1.0 optimizations and code cleanup
 
 ### Notes
 
 Everything was pretty straightforward. The most time consuming part was getting
 the IDE and build envionment downloaded and configured correctly. Instructions were
-good, thanks!
+good, thanks! I built this while traveling on the Italian coast. The spotty internet
+made it more time-consuming to solve issues..  ;)
 
 ### GIF Walkthrough
 
