@@ -6,13 +6,16 @@
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
         android:text="Study cursors"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <TextView
         android:id="@+id/tvPriority"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="3"
+        android:text="High"
+        android:gravity="right"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 </LinearLayout>

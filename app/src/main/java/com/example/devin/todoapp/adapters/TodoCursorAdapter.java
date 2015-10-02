@@ -2,6 +2,7 @@ package com.example.devin.todoapp.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.example.devin.todoapp.R;
+import com.example.devin.todoapp.lib.Priorities;
 
 /**
  * Created by devin on 10/2/15.
@@ -30,24 +32,26 @@ public class TodoCursorAdapter extends CursorAdapter {
     // such as setting the text on a TextView.
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        // Find fields to populate in inflated template
         TextView tvBody = (TextView) view.findViewById(R.id.tvBody);
         TextView tvPriority = (TextView) view.findViewById(R.id.tvPriority);
 
-        // Extract properties from cursor
         String body = cursor.getString(cursor.getColumnIndexOrThrow("Body"));
         int priority = cursor.getInt(cursor.getColumnIndexOrThrow("Priority"));
 
-        // Populate fields with extracted properties
         tvBody.setText(body);
-        tvPriority.setText(String.valueOf(priority));
+        tvPriority.setText(Priorities.getText(priority));
 
-        if (cursor.getPosition() % 2 == 1) {
-//            view.setBackgroundColor(context.getColor(R.color.background_odd));
+        // color switching
+        switch (priority) {
+            case Priorities.LOW:
+                view.setBackgroundColor(Color.parseColor("#A2BC13"));
+                break;
+            case Priorities.MEDIUM:
+                view.setBackgroundColor(Color.parseColor("#FFD700"));
+                break;
+            case Priorities.HIGH:
+                view.setBackgroundColor(Color.parseColor("#C80000"));
+                break;
         }
-        else {
-//            view.setBackgroundColor(context.getColor(R.color.background_even));
-        }
-
     }
 }

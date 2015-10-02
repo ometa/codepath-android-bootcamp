@@ -6,36 +6,59 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
+import com.example.devin.todoapp.lib.Priorities;
 import com.example.devin.todoapp.models.TodoItem;
 
 public class EditItemActivity extends AppCompatActivity {
 
     EditText etTodoItem;
+    Spinner spinnerPriority;
+
     TodoItem item;
-    Intent intent;
+    Intent returnIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
 
-        intent = new Intent(EditItemActivity.this, MainActivity.class);
+        returnIntent = new Intent(EditItemActivity.this, MainActivity.class);
 
         long id = getIntent().getLongExtra("id", -1);
-
         item = TodoItem.load(TodoItem.class, id);
         if (item == null) {
-            intent.putExtra("message", "Could not load item with id: " + id);
-            setResult(RESULT_CANCELED, intent);
+            returnIntent.putExtra("message", "Could not load item with id: " + id);
+            setResult(RESULT_CANCELED, returnIntent);
             finish();
         }
 
         // populate activity
         etTodoItem = (EditText) findViewById(R.id.etTodoItem);
+        spinnerPriority = (Spinner) findViewById(R.id.spinnerPriority);
+
         etTodoItem.setText(item.body);
         etTodoItem.requestFocus();
+
+        ArrayAdapter<String> priorityAdaptor = new ArrayAdapter<>(this,  android.R.layout.simple_spinner_item, Priorities.textValues);
+        priorityAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPriority.setAdapter(priorityAdaptor);
+        spinnerPriority.setSelection(item.priority);
+
+        spinnerPriority.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spinnerPriority.setSelection(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
     }
 
     @Override
@@ -60,18 +83,32 @@ public class EditItemActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void ocSaveItem(View view) {
-        etTodoItem = (EditText) findViewById(R.id.etTodoItem);
+    private boolean valuesHaveChanged() {
         String newBody = etTodoItem.getText().toString();
+        int newPriority = spinnerPriority.getSelectedItemPosition();
 
-        if (! newBody.equals(item.body)) {
-            item.body = newBody;
-            item.save();
-            intent.putExtra("message", "Updated " + item.body);
-            setResult(RESULT_OK, intent);
+
+        if (!newBody.equals(item.body)) return true;
+        if (newPriority != item.priority) return true;
+        return false;
+    }
+
+    private void saveItem() {
+        String newBody = etTodoItem.getText().toString();
+        int newPriority = spinnerPriority.getSelectedItemPosition();
+        item.body = newBody;
+        item.priority = newPriority;
+        item.save();
+    }
+
+    public void ocSaveItem(View view) {
+        if (valuesHaveChanged()) {
+            saveItem();
+            returnIntent.putExtra("message", "Updated " + item.body);
+            setResult(RESULT_OK, returnIntent);
         } else {
-            intent.putExtra("message", "No Change");
-            setResult(RESULT_CANCELED, intent);
+            returnIntent.putExtra("message", "No Change");
+            setResult(RESULT_CANCELED, returnIntent);
         }
         finish();
     }
