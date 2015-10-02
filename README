@@ -1,37 +1,51 @@
-# Todoodle!
+# Pre-work - *Todoodle*
 
-This is a super-sweet Android app for a todo list. It's my first Android app ever!
+Todoodle is a super-sweet Android app that allows building a todo list and basic todo
+items management functionality including adding new items, editing and deleting an existing item.
 
-### Completed user stories
+Submitted by: **Devin Breen**
 
+Time Spent: **12** hours spent in total:
+
+## User Stories
+
+The following **required** functionality is completed:
 - [x] Required: Adding and Removing todo items
 - [x] Required: Editing todo items w/ cursor focus
 - [x] Required: Persisting todo items to file and retrieval upon app restart
+
+The following **optional** features are implemented:
+
 - [x] Recommended: Persistence to Sqlite using ActiveAndroid ORM
 - [x] Bonus: Priority field that gets a default when a task is added and updates via Spinner widget
 - [x] Bonus: Color-coded entries based on priority
-- [x] Misc: Don't add a blank item
+- [x] Misc: Don't allow adding a blank item
 
-### Time
+## Video Walkthrough
 
-12 hours spent in total:
+<img src='https://raw.githubusercontent.com/ometa/codepath-android-bootcamp/master/demo/project_0.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-- 2.5 downloading and configuring dev environment
-- 1.5 working through initial tutorial and todo app
-- 1.0 adding edit capabilities, building animated gif, submission
-- 4.0 conversion to sqlite using ActiveAndroid (on spotty internet connection)
-- 2.0 spinner widget for priority
-- 1.0 optimizations and code cleanup
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-### Notes
+## Notes
 
 Everything was pretty straightforward. The most time consuming part was getting
 the IDE and build envionment downloaded and configured correctly. Instructions were
 good, thanks! I built this while traveling on the Italian coast. The spotty internet
-made it more time-consuming to solve issues..  ;)
+made it more time-consuming to solve issues.  ;)
 
-### GIF Walkthrough
+## License
 
-![Video Walkthrough](demo/project_0.gif)
+    Copyright 2015 Devin Breen
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
