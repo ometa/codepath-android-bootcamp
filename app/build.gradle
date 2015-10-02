@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
-
     defaultConfig {
         applicationId "com.example.devin.todoapp"
         minSdkVersion 16
@@ -17,10 +16,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
-
+repositories {
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'commons-io:commons-io:2.4'
+    // sqlite
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    // todo: see if this next line can be removed.
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // material design
+    //compile 'com.android.support:design:23.0.0'
+    //compile 'com.android.support:recyclerview-v7:23.0.0'
+    //compile 'com.android.support:percent:23.0.0'
+    //compile 'com.melnykov:floatingactionbutton:1.2.0'
 }

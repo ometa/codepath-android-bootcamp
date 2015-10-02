@@ -8,23 +8,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.devin.todoapp.models.TodoItem;
+
 public class EditItemActivity extends AppCompatActivity {
 
     EditText etTodoItem;
-    int todoListPosition;
+    TodoItem item;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
 
-        // pull values from intent
-        String text = getIntent().getStringExtra("text");
-        todoListPosition = getIntent().getIntExtra("position", -1);
+        intent = new Intent(EditItemActivity.this, MainActivity.class);
+
+        long id = getIntent().getLongExtra("id", -1);
+
+        item = TodoItem.load(TodoItem.class, id);
+        if (item == null) {
+            intent.putExtra("message", "Could not load item with id: " + id);
+            setResult(RESULT_CANCELED, intent);
+            finish();
+        }
 
         // populate activity
         etTodoItem = (EditText) findViewById(R.id.etTodoItem);
-        etTodoItem.setText(text);
+        etTodoItem.setText(item.body);
         etTodoItem.requestFocus();
     }
 
@@ -51,12 +61,18 @@ public class EditItemActivity extends AppCompatActivity {
     }
 
     public void ocSaveItem(View view) {
-        Intent i = new Intent(EditItemActivity.this, MainActivity.class);
-
         etTodoItem = (EditText) findViewById(R.id.etTodoItem);
-        i.putExtra("text", etTodoItem.getText().toString());
-        i.putExtra("position", todoListPosition);
-        setResult(RESULT_OK, i);
+        String newBody = etTodoItem.getText().toString();
+
+        if (! newBody.equals(item.body)) {
+            item.body = newBody;
+            item.save();
+            intent.putExtra("message", "Updated " + item.body);
+            setResult(RESULT_OK, intent);
+        } else {
+            intent.putExtra("message", "No Change");
+            setResult(RESULT_CANCELED, intent);
+        }
         finish();
     }
 }

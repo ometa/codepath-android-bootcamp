@@ -9,12 +9,15 @@ This is an Android demo application for a todo list.
 - 2.5 downloading and configuring dev environment
 - 1.5 working through initial tutorial and todo app
 - 1.0 adding edit capabilities, building animated gif, submission
+- 4.0 conversion to sqlite using ActiveAndroid
 
 ### Completed user stories
 
 - [x] Required: Adding and Removing todo items
 - [x] Required: Editing todo items w/ cursor focus
 - [x] Required: Persisting todo items to file and retrieval upon app restart
+- [x] Recommended: Persistence to Sqlite using ActiveAndroid ORM
+- [x] Bonus: Added priority field
 
 ### Notes
 
